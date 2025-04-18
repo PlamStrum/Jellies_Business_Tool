@@ -6,8 +6,7 @@ A Python-Tkinter data entry tool for storing electrician business records in MyS
 ## 🚀 Project Goals
 - Build a simple desktop tool to enter job data via forms.
 - Store structured data in a MySQL database called `Jellies`.
-- Use Tableau to analyze and visualize business data (e.g. job locations, cost breakdowns).
-
+- Use Tableau to analyze and visualize business data for grwoth and stastisitcal purposes 
 ---
 
 ## 🛠 Technologies Used
