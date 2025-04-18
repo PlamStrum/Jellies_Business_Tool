@@ -20,3 +20,6 @@ A Python-Tkinter data entry tool for storing electrician business records in MyS
 ## 📦 Setup Instructions
 
 ### 1. Clone this repository
+```bash
+   git clone https://github.com/PlamStrum/Jellies_Business_Tool.git
+   cd Jellies_Business_Tool
