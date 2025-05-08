@@ -3,13 +3,13 @@ A Python-Tkinter data entry tool for storing electrician business records in MyS
 
 ---
 
-## 🚀 Project Goals
+## Project Goals
 - Build a simple desktop tool to enter job data via forms.
 - Store structured data in a MySQL database called `Jellies`.
 - Use Tableau to analyze and visualize business data for grwoth and stastisitcal purposes 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 - Python 3
 - Tkinter (GUI)
 - MySQL (via `mysql-connector-python`)
@@ -17,7 +17,7 @@ A Python-Tkinter data entry tool for storing electrician business records in MyS
 
 ---
 
-## 📦 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone this repository
 ```bash
