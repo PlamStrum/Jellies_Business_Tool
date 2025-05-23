@@ -1,38 +1,29 @@
 import os
-import pandas as pd
+import csv
 from db_config import get_connection
 
-# Configuration: output folder
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), 'exports')
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+def export_all():
+    """
+    Connects to the Jellies database, exports each table
+    to a CSV file under an 'exports' folder.
+    """
+    tables = ['CustomerData', 'Inventory', 'BusinessIndex']
+    export_dir = os.path.join(os.path.dirname(__file__), 'exports')
+    os.makedirs(export_dir, exist_ok=True)
 
-QUERY_TEMPLATES = {
-    'CustomerData': 'SELECT * FROM CustomerData;',
-    'Inventory': 'SELECT * FROM Inventory;',
-    'BusinessIndex': 'SELECT * FROM BusinessIndex;',
-}
-
-
-def export_table(table_name: str, query: str):
-    """Exports a SQL query result to a CSV file."""
     cnx = get_connection()
-    try:
-        df = pd.read_sql(query, cnx)
-        output_path = os.path.join(OUTPUT_DIR, f"{table_name}.csv")
-        df.to_csv(output_path, index=False)
-        print(f"Exported {table_name} to {output_path}")
-    except Exception as e:
-        print(f"Error exporting {table_name}: {e}")
-    finally:
-        cnx.close()
+    cursor = cnx.cursor()
 
+    for table in tables:
+        cursor.execute(f"SELECT * FROM {table}")
+        rows = cursor.fetchall()
+        columns = [col[0] for col in cursor.description]
 
-def main():
-    print("Starting data export...")
-    for name, query in QUERY_TEMPLATES.items():
-        export_table(name, query)
-    print("All data exported successfully.")
+        csv_path = os.path.join(export_dir, f"{table}.csv")
+        with open(csv_path, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(columns)
+            writer.writerows(rows)
 
-
-if __name__ == '__main__':
-    main()
+    cursor.close()
+    cnx.close()

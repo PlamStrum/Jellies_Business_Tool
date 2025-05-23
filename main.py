@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
+from Export import export_all
+import tkinter.messagebox as messagebox
+
 
 # Import database connection utility
 def get_connection():
@@ -8,6 +11,7 @@ def get_connection():
     return _gc()
 
 class JelliesApp:
+
     def __init__(self, root):
         self.root = root
         self.root.title("Jellies Business Tool")
@@ -75,6 +79,18 @@ class JelliesApp:
         # --- Submit Button ---
         submit_btn = ttk.Button(root, text="Submit", command=self.submit_data)
         submit_btn.pack(pady=15)
+
+        # --- Export Button ---
+        export_btn = ttk.Button(root, text="Export Data", command=self.export_data)
+        export_btn.pack(pady=5)
+
+    def export_data(self):
+        try:
+            export_all()
+            messagebox.showinfo("Export Complete",
+                                "Tables exported to the 'exports' folder.")
+        except Exception as e:
+            messagebox.showerror("Export Error", str(e))
 
     def add_inventory_row(self):
         """Adds a new row of entry widgets for Product Name, Price, Shop, and Purchase Date."""
